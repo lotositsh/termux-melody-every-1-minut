@@ -1,10 +1,11 @@
 import time
 import os
 import signal
+import random
 
 filename = "melody1.mp3"
 duration = 1800
-interval = 60
+interval = random.randint(30, 60)
 os.system("termux-wake-lock")
 
 # Define a signal handler function to release wakelock on SIGINT
