@@ -11,7 +11,7 @@ filename2 = "melody2.mp3"
 
 
 def assan(sig, frame):
-    print("1 - shavasana;\n0 - exit")
+    print("\n1 - shavasana;\n0 - exit")
     choice = input("Enter your choice: ")
     if choice == "1":
         os.system("play " + filename2)
@@ -21,7 +21,6 @@ def assan(sig, frame):
         exit(0)
 signal.signal(signal.SIGINT, assan)
 
-# Start the countdown loop
 os.system("termux-wake-lock")
 remaining_time = duration
 for i in range(duration, 0, -interval):
