@@ -17,7 +17,7 @@ def assan(sig, frame):
         os.system("termux-wake-unlock")
         print("\nWakelock released. Returning to menu...\n")
         exit(0)
-    signal.signal(signal.SIGINT, assan)
+signal.signal(signal.SIGINT, assan)
 
 # Start the countdown loop
 os.system("termux-wake-lock")
