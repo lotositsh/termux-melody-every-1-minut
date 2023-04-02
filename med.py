@@ -16,14 +16,15 @@ def assan(sig, frame):
     elif choice == '0':
         os.system("termux-wake-unlock")
         print("\nWakelock released. Returning to menu...\n")
-    else:
-        print("Invalid choice. Please try again.")
-        return
+        exit(0)
     signal.signal(signal.SIGINT, assan)
 
 # Start the countdown loop
 os.system("termux-wake-lock")
-for i in range(duration, 0, -interval):
-    print(f"{i//60} minutes remaining...")
+remaining_time = duration
+while remaining_time > 0:
+    print(f"{remaining_time // 60} minutes remaining...")
     os.system("play " + filename)
-    time.sleep(interval)
+    time.sleep(min(interval, remaining_time))
+    remaining_time -= interval
+os.system("termux-wake-unlock")
