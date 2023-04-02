@@ -12,8 +12,8 @@ def menu():
     while True:
         def assan(sig, frame):
             os.system("termux-wake-unlock")
-            print("\nWakelock released. Exiting...")
-            exit(0)
+            print("\nWakelock released. Returning to menu...\n")
+            continue
 
         signal.signal(signal.SIGINT, assan)
 
