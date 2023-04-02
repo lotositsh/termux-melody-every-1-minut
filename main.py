@@ -3,7 +3,7 @@ import shavasana as f2
 
 while True:
     print("Please select a yoga pose to perform:")
-    print("1. Assans")
+    print("1. Assan")
     print("2. Shavasana")
     print("0. Exit")
 
