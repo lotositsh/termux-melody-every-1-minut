@@ -13,7 +13,7 @@ def menu():
         def assan(sig, frame):
             os.system("termux-wake-unlock")
             print("\nWakelock released. Returning to menu...\n")
-            continue
+            return
 
         signal.signal(signal.SIGINT, assan)
 
