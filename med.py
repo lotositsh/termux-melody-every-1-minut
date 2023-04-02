@@ -15,8 +15,8 @@ def assan(sig, frame):
     choice = input("Enter your choice: ")
     if choice == "1":
         os.system("play " + filename2)
-		os.system("termux-wake-unlock")
-		print("\nwake unlock\n")
+        os.system("termux-wake-unlock")
+        print("\nwake unlock\n")
         exit(0)
     elif choice == '0':
         os.system("termux-wake-unlock")
