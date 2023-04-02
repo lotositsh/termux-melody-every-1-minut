@@ -3,22 +3,10 @@ import os
 import signal
 import random
 
-filename1 = "melody1.mp3"
-filename2 = "melody2.mp3"
+filename = "melody1.mp3"
 duration = 1800
 interval = random.randint(30, 60)
-
-def assan(sig, frame):
-    os.system("termux-wake-unlock")
-    print("\nWakelock released. Exiting...")
-    exit(0)
-
-def shavasana(sig, frame):
-    os.system("termux-wake-unlock")
-    print("\nWakelock released. Exiting...")
-    exit(0)
-
-signal.signal(signal.SIGINT, assan)
+filename2 = "melody2.mp3"
 
 while True:
     print("Please select a yoga pose to perform:")
@@ -29,26 +17,46 @@ while True:
     choice = input("Enter your choice: ")
 
     if choice == "1":
+        def assan(sig, frame):
+            os.system("termux-wake-unlock")
+            print("\nWakelock released. Exiting...")
+            exit(0)
+
+        # Register the signal handler function for SIGINT
         signal.signal(signal.SIGINT, assan)
+
+        # Start the countdown loop
         os.system("termux-wake-lock")
-
-        for i in range(duration, 0, -interval):
-            print(f"{i // 60} minutes remaining...")
-            os.system("play " + filename1)
-            time.sleep(interval)
-
-        os.system("termux-wake-unlock")
+        try:
+            for i in range(duration, 0, -interval):
+                print(f"{i // 60} minutes remaining...")
+                os.system("play " + filename)
+                time.sleep(interval)
+        except KeyboardInterrupt:
+            print("\nReturning to menu...\n")
+        finally:
+            # Release wakelock at the end of the loop
+            os.system("termux-wake-unlock")
 
     elif choice == "2":
+        def shavasana(sig, frame):
+            os.system("termux-wake-unlock")
+            print("\nWakelock released. Exiting...")
+            exit(0)
+
         signal.signal(signal.SIGINT, shavasana)
         os.system("termux-wake-lock")
 
-        for i in range(duration, 0, -interval):
-            print(f"{i // 60} minutes remaining...")
+        def play():
             os.system("play " + filename2)
-            time.sleep(interval)
 
-        os.system("termux-wake-unlock")
+        try:
+            while True:
+                play()
+        except KeyboardInterrupt:
+            print("\nReturning to menu...\n")
+        finally:
+            os.system("termux-wake-unlock")
 
     elif choice == "0":
         print("Exiting...")
